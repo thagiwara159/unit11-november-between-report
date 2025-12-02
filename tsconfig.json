@@ -6,5 +6,9 @@
     "allowJs": true,
     "checkJs": false
   },
-  "include": ["./**/*.js", "./**/*.gs", "./**/*.ts"]
+  "include": [
+    "./**/*.js",
+    "./**/*.gs",
+    "./**/*.ts"
+  ]
 }
