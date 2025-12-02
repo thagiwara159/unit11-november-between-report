@@ -4,11 +4,8 @@
     "lib": ["ES2020"],
     "types": ["google-apps-script"],
     "allowJs": true,
-    "checkJs": false
+    "checkJs": false,
+    "noEmit": true,
   },
-  "include": [
-    "./**/*.js",
-    "./**/*.gs",
-    "./**/*.ts"
-  ]
+  "include": ["./**/*.js", "./**/*.gs", "./**/*.ts"]
 }
