@@ -56,8 +56,7 @@ function sendTestEmail() {
     // 基本集計関数を呼び出して日付、合計金額、件数をメールの件名、本文に出力
     const summary = calculateSummary();
     const subject = `【テスト】${summary.period} 売上レポート`;
-    const body = `${summary.period} の売上実績\n\n総売上: ${summary.totalSales}円\n
-                    件数: ${summary.totalCount}件`;
+    const body = `${summary.period} の売上実績\n\n総売上: ${summary.totalSales}円\n件数: ${summary.totalCount}件`;
     // メール送信　配信先取得関数から取得したオブジェクトを使ってメールアドレスを添付
     GmailApp.sendEmail(recipients[0].email, subject, body);
     SpreadsheetApp.getUi().alert(`テストメール送信完了\n送信先: ${recipients[0].email}`);

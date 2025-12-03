@@ -26,7 +26,11 @@ function convertToPdf(){
         // ⭐️ バイナリデータにファイル名を付けて、PDFファイルとして格納
         const blob = response.getBlob().setName('月次レポート.PDF');
         // ⭐️ 指定のフォルダにPDFファイルを保存
-        folder.createFile(blob);
+        const file = folder.createFile(blob);
+
+        SpreadsheetApp.getUi().alert(`PDF作成完了！ \nファイル名: ${file.getName()}`);
+        
+        return file;
 
     }catch(e){}
 }
