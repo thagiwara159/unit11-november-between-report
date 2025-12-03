@@ -4,16 +4,17 @@ function setupRecipients(){
         const existing = ss.getSheetByName('配信先情報');
         // 同名のシートがあれば削除して初期化
         if (existing) ss.deleteSheet(existing);
-
+        // なければ作成
         const sheet = ss.insertSheet('配信先情報');
-
+        // メールデータを2次元配列にする
         const data = [
             ['田中太郎', 'tanaka@company.com'],
             ['佐藤花子', 'sato@company.com'],
             ['山田次郎', 'yamada@company.com']
         ];
-
+        // 配列にしてヘッダー出力
         sheet.getRange('A1:B1').setValues([['名前','メールアドレス']]);
+        // ⭐️ (1,1,data.length, data[0].length) の書き方にすれば配列の要素数を気にせず書ける
         sheet.getRange(2, 1, data.length, data[0].length).setValues(data);
 
         SpreadsheetApp.getUi().alert('配信先設定完了！')
@@ -55,6 +56,8 @@ function sendTestEmail() {
     }
     // 基本集計関数を呼び出して日付、合計金額、件数をメールの件名、本文に出力
     const summary = calculateSummary();
+    // ⭐️ ``バッククォートで囲むと「テンプレートリテラル」になる
+    // テンプレートリテラルの中で ${} を使って変数や式を埋め込める
     const subject = `【テスト】${summary.period} 売上レポート`;
     const body = `${summary.period} の売上実績\n\n総売上: ${summary.totalSales}円\n件数: ${summary.totalCount}件`;
     // メール送信　配信先取得関数から取得したオブジェクトを使ってメールアドレスを添付
@@ -66,4 +69,10 @@ function sendTestEmail() {
  * ⭐️ メールが送れるか配信テスト
  * ⭐️ メニューに配信先情報設定とテストメール機能追加
  * ⭐️ メール内容と配信先が性格に設定されているか確認
+ */
+/**
+ * ⭐️ 配列の要素数を気にせず配列を set するには
+ * ⭐️ (開始行, 開始列, data.length, data[0].length) で書く
+ * ⭐️ 複数のセルに値を入力するには .setValues() を使う
+ * ⭐️ メールの送信は GmailApp.sendEmail()
  */

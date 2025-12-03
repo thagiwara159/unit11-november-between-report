@@ -8,7 +8,7 @@ function sendReportWithPDF(){
         return;
     }
     // シートをPDFに変換して保存する関数を呼び出し
-    const pdfFile = convertToPdf(); // ⭐️ convertToPdf()の最後にreturnをして無くてForEachの中でundefinedを繰り返してた
+    const pdfFile = convertToPdf(); // ⭐️ convertToPdf()の最後にreturnをしてなくてForEachの中でundefinedを繰り返してた
     // 基本集計から合計金額と件数と日付を取ってくる
     const summary = calculateSummary();
     const subject = `【テスト】${summary.period} 売上レポート`; // 件名
@@ -39,8 +39,15 @@ function sendReportWithPDF(){
 /**
  * ⚠️送信成功、失敗のカウント結果を管理する機能がわからない：successCount変数作ってこれをカウンタにした
  * エラーが発生しても処理を継続する方法は？：try-catch
- * 送信後に結果を残す：これはgetUi().alertでお知らせ　
+ * 送信後に結果を残す：getUi().alertでお知らせ　
  * 機能の動作確認：convertToPdf()が作成したPDFファイルを返していなかったのでメール送信でエラーが出てた
  * メニューに機能追加
  * 配信が正確に行われるか確認：動作確認済み
+ */
+/**
+ * ⭐️ 最初にデータがあるかシートがあるかを if(!sheet) return;のようなガード条件で中断するのが一番シンプル
+ * ⭐️ 今回はループの中でファイルを返す関数のミスでメール送信でバグが出た
+ * ⭐️ エラーが起きやすいとこに単発try‐catchを入れよう
+ * ⭐️ ループの中、外部API呼び出し、ファイル操作(Drive)など
+ * ⭐️ 大きな処理を丸ごとtry-catchで包むのはNG
  */

@@ -25,11 +25,12 @@ function createDepartmentSummary(){
         /** ⭐️ ここの計算方法が面白かった!　部門([6])を上から順に取り込んで、連続して
          * 同じ部門が続いていたらその部門の金額[4]を足してく、次に違う部門が来たらその部門は
          * その部門で足していくので各部門ごとに合計金額が算出できるという仕組み。
+         * ⭐️ 部署ごとのカゴにその部署の金額を入れていくイメージ
          */
         data.forEach(row => {
             const dept = row[6];
             results[dept] = (results[dept] || 0) + row[4]; // ⭐️ ||は「論理 or (または)」
-        });
+        }); // ⭐️ この処理は項目(今回は部署)が増えてもコードを変えないでOK
 
         // ⭐️ オブジェクトを返す
         Logger.log(results);
@@ -58,6 +59,8 @@ function reportCreateByDept(){
 
         let row = 4;
         // ⭐️ 関数呼び出しのとこの（）を付け忘れててここの処理が飛んでた
+        // ⭐️ 関数のあとに（）を付けないと関数そのものを呼び出してるだけ
+        // ⭐️ 関数（）で呼び出して関数を実行させる
         Object.entries(createDepartmentSummary()).forEach(([dept, amount]) => {
             sheet.getRange(row, 1).setValue(dept);
             sheet.getRange(row, 2).setValue(amount + '円');
