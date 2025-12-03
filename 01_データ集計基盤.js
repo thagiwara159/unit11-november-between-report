@@ -1,3 +1,4 @@
+// 売上データの取得関数
 function getCurrentMonthData(){
     try{
         const ss = SpreadsheetApp.getActiveSpreadsheet();
