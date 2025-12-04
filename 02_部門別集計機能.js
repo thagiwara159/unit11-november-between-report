@@ -41,6 +41,7 @@ function createDepartmentSummary(){
     }catch(e){}
 }
 
+// 部門別レポートシート作成
 function reportCreateByDept(){
     try{
         const ss = SpreadsheetApp.getActiveSpreadsheet();

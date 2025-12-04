@@ -65,6 +65,7 @@ function calculateSummary(){
     }catch(e){}
 }
 
+// 月次サマリーシートの作成
 function createSummary(){
     try{
         const ss = SpreadsheetApp.getActiveSpreadsheet();
